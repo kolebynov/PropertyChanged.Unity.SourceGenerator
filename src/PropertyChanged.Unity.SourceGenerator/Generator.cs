@@ -20,7 +20,7 @@ public class Generator
     public Generator(EventArgsCacheLookup eventArgsCacheLookup)
     {
         this.eventArgsCacheLookup = eventArgsCacheLookup;
-     
+
         this.writer.WriteLine(StringConstants.FileHeader);
     }
 
@@ -75,10 +75,10 @@ public class Generator
         }
 
         this.writer.WriteLine();
-        
+
         this.writer.WriteLine("{");
         this.writer.Indent++;
-        
+
         string nullable = typeAnalysis.NullableContext.HasFlag(NullableContextOptions.Annotations) ? "?" : "";
         if (typeAnalysis.INotifyPropertyChanged.RequiresEvent)
         {
@@ -98,7 +98,7 @@ public class Generator
 
         this.GenerateRaisePropertyChangingOrChangedMethod(typeAnalysis, typeAnalysis.INotifyPropertyChanged, x => x.OnPropertyNameChanged);
         this.GenerateRaisePropertyChangingOrChangedMethod(typeAnalysis, typeAnalysis.INotifyPropertyChanging, x => x.OnPropertyNameChanging);
-        
+
         this.writer.Indent--;
         this.writer.WriteLine("}");
 
@@ -288,6 +288,11 @@ public class Generator
         foreach (string attr in member.AttributesForGeneratedProperty)
         {
             this.writer.WriteLine(attr);
+        }
+
+        if (member.GenerateCreatePropertyAttribute)
+        {
+            this.writer.WriteLine("[global::Unity.Properties.CreateProperty]");
         }
 
         this.writer.WriteLine($"{propertyAccessibility}{(member.IsVirtual ? "virtual " : "")}{member.FullyQualifiedTypeName} {member.Name}");

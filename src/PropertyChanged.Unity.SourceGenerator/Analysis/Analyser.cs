@@ -47,7 +47,7 @@ public partial class Analyser
             // symbol we want to test
             var propertyChangedEventArgsSymbol = inpcAssembly.GetTypeByMetadataName("System.ComponentModel.PropertyChangedEventArgs");
             var propertyChangingEventArgsSymbol = inpcAssembly.GetTypeByMetadataName("System.ComponentModel.PropertyChangingEventArgs");
-        
+
             this.propertyChangedInterfaceAnalyser = new(inpchangedSymbol, "System.ComponentModel.PropertyChangedEventHandler", propertyChangedEventArgsSymbol!, this.diagnostics, compilation);
             this.propertyChangingInterfaceAnalyser = new(inpchangingSymbol!, "System.ComponentModel.PropertyChangingEventHandler", propertyChangingEventArgsSymbol!, this.diagnostics, compilation);
         }
@@ -266,6 +266,7 @@ public partial class Analyser
         string? explicitName = null;
         Accessibility getterAccessibility = Accessibility.Public;
         Accessibility setterAccessibility = Accessibility.Public;
+        bool generateCreatePropertyAttribute = true;
 
         foreach (var arg in notifyAttribute.ConstructorArguments)
         {
@@ -280,6 +281,10 @@ public partial class Analyser
             else if (arg.Type?.Name == "Setter")
             {
                 setterAccessibility = (Accessibility)(int)arg.Value!;
+            }
+            else if (arg.Type?.SpecialType == SpecialType.System_Boolean)
+            {
+                generateCreatePropertyAttribute = (bool)arg.Value!;
             }
         }
 
@@ -315,6 +320,7 @@ public partial class Analyser
             OnPropertyNameChanging = this.propertyChangingInterfaceAnalyser!.FindOnPropertyNameChangedMethod(backingMember.ContainingType, name, type, backingMember.ContainingType),
             AttributesForGeneratedProperty = this.GetAttributesForGeneratedProperty(attributes),
             DocComment = ParseDocComment(backingMember.GetDocumentationCommentXml()),
+            GenerateCreatePropertyAttribute = generateCreatePropertyAttribute,
         };
 
         if (type.IsReferenceType)

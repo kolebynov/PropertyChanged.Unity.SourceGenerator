@@ -12,7 +12,7 @@
 <DebugSymbols>true</DebugSymbols>
 
     <VersionPrefix>0.0.0</VersionPrefix>
-    <PackageId>PropertyChanged.SourceGenerator</PackageId>
+    <PackageId>PropertyChanged.Unity.SourceGenerator</PackageId>
     <PackageTags>INPC;INotifyPropertyChanged;INotifyPropertyChanging;SourceGenerator;MVVM;Binding</PackageTags>
     <Copyright>Copyright © Antony Male 2021</Copyright>
     <PackageIcon>icon.png</PackageIcon>
@@ -25,6 +25,7 @@
     <Description>Powerful INotifyPropertyChanged Source Generator, which generates INPC boilerplate for you as part of your build.
 Supports features such as automatic and manual dependencies between properties, notifications when specific properties change, and more.</Description>
     <DevelopmentDependency>true</DevelopmentDependency>
+    <RootNamespace>PropertyChanged.SourceGenerator</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

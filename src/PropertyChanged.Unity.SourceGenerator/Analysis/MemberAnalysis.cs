@@ -17,6 +17,7 @@ public class MemberAnalysisBuilder
     public OnPropertyNameChangedInfo? OnPropertyNameChanged { get; set; }
     public OnPropertyNameChangedInfo? OnPropertyNameChanging { get; set; }
     public List<string>? AttributesForGeneratedProperty { get; set; }
+    public bool GenerateCreatePropertyAttribute { get; set; }
 
     public string[]? DocComment { get; set; }
 
@@ -46,6 +47,7 @@ public class MemberAnalysisBuilder
             AlsoNotify = this.alsoNotify == null
                  ? ReadOnlyEquatableList<AlsoNotifyMember>.Empty
                  : new ReadOnlyEquatableList<AlsoNotifyMember>(this.alsoNotify.OrderBy(x => x.Name).ToList()),
+            GenerateCreatePropertyAttribute = this.GenerateCreatePropertyAttribute,
         };
     }
 }
@@ -66,4 +68,6 @@ public class MemberAnalysis : IMember
     public required ReadOnlyEquatableList<string> DocComment { get; init; }
 
     public required ReadOnlyEquatableList<AlsoNotifyMember> AlsoNotify { get; init; }
+
+    public required bool GenerateCreatePropertyAttribute { get; init; }
 }

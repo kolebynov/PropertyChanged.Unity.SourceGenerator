@@ -50,7 +50,7 @@ public static class StringConstants
             internal class NotifyAttribute : global::System.Attribute
             {
                 /// <summary>
-                /// Generate a property whose name is derived from the name of this field, with a public getter and setter
+                /// Generate a property whose name is derived from the name of this field, with a public getter and setter, and generate CreatePropertyAttribute
                 /// </summary>
                 public NotifyAttribute() { }
 
@@ -60,20 +60,29 @@ public static class StringConstants
                 /// <param name="name">Name of the generated property</param>
                 /// <param name="get">Accessibility of the generated getter</param>
                 /// <param name="set">Accessibility of the generated setter</param>
-                public NotifyAttribute(string name, Getter get = Getter.Public, Setter set = Setter.Public) { }
+                /// <param name="generateCreatePropertyAttribute">Generate CreatePropertyAttribute or not</param>
+                public NotifyAttribute(string name, Getter get = Getter.Public, Setter set = Setter.Public, bool generateCreatePropertyAttribute = true) { }
 
                 /// <summary>
                 /// Generate a property whose name is derived from the name of this field, with the given getter and optionally setter accessibilities
                 /// </summary>
                 /// <param name="get">Accessibility of the generated getter</param>
                 /// <param name="set">Accessibility of the generated setter</param>
-                public NotifyAttribute(Getter get, Setter set = Setter.Public) { }
+                /// <param name="generateCreatePropertyAttribute">Generate CreatePropertyAttribute or not</param>
+                public NotifyAttribute(Getter get, Setter set = Setter.Public, bool generateCreatePropertyAttribute = true) { }
 
                 /// <summary>
                 /// Generate a property whose name is derived from the name of this field, with a public getter and the given setter accessibility
                 /// </summary>
                 /// <param name="set">Accessibility of the generated setter</param>
-                public NotifyAttribute(Setter set) { }
+                /// <param name="generateCreatePropertyAttribute">Generate CreatePropertyAttribute or not</param>
+                public NotifyAttribute(Setter set, bool generateCreatePropertyAttribute = true) { }
+                
+                /// <summary>
+                /// Generate a property whose name is derived from the name of this field, with a public getter and setter, and optionally generate CreatePropertyAttribute
+                /// </summary>
+                /// <param name="generateCreatePropertyAttribute">Generate CreatePropertyAttribute or not</param>
+                public NotifyAttribute(bool generateCreatePropertyAttribute) { }
 
                 /// <summary>
                 /// If <c>true</c>, the generated property will be <c>virtual</c>.

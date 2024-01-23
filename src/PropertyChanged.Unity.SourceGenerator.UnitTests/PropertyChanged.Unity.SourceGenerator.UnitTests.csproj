@@ -5,6 +5,7 @@
 
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
+    <RootNamespace>PropertyChanged.SourceGenerator.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PropertyChanged.SourceGenerator\PropertyChanged.SourceGenerator.csproj" />
+    <ProjectReference Include="..\PropertyChanged.Unity.SourceGenerator\PropertyChanged.Unity.SourceGenerator.csproj" />
   </ItemGroup>
 
 </Project>
